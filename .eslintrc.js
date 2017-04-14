@@ -17,15 +17,6 @@ module.exports = {
     ],
     "rules": {
         "comma-spacing": 2,
-        "key-spacing": [
-          "error", {
-            "align": {
-              "beforeColon": false,
-              "afterColon": false,
-              "on": "value"
-            }
-          }
-        ],
         "no-console": 1,
         "prefer-const": 2,
         "prefer-arrow-callback": 1,

@@ -1,6 +1,10 @@
 import React from 'react';
 
-const CustomerTable = () => {
+import CustomerRow from './CustomerRow';
+
+import '../styles/CustomerTable.css';
+
+const CustomerTable = (props) => {
   return (
     <div className="col-xs-12 col-md-9">
       <table>
@@ -13,6 +17,9 @@ const CustomerTable = () => {
             <th>Delete</th>
           </tr>
         </thead>
+        <tbody>
+          { props.customers.map((customer, i) => <CustomerRow key={`customer-${i}`} customer={customer} />) }
+        </tbody>
       </table>
     </div>
   );

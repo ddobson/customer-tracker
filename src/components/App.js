@@ -1,10 +1,12 @@
 // Dependancies
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import config from '../config';
 
 // Components
 import Navigation from './Navigation';
 import CustomerTable from './CustomerTable';
+import NewCustomer from './NewCustomer';
 
 // Styles
 import '../styles/App.css';
@@ -45,13 +47,16 @@ class App extends React.Component {
     }
 
     return (
-      <div className="App">
-        <h1 className="center-text">Customer Tracker</h1>
-        <div className="row content">
-          <Navigation />
-          <CustomerTable customers={ this.state.customers } />
+      <BrowserRouter>
+        <div className="App">
+          <h1 className="center-text">Customer Tracker</h1>
+          <div className="row main">
+            <Navigation />
+            <Route exact path="/" render={ () => <CustomerTable customers={ this.state.customers }/> } />
+            <Route exact path="/new" component={ NewCustomer } />
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

@@ -1,0 +1,16 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Sample Cusomer",
+      "email": "sample@email.com",
+      "phone": "401-555-1234",
+      "address": {
+        "street": "123 Fake St.",
+        "city": "Providence",
+        "state": "RI",
+        "zip": "02903"
+      }
+    }
+  ]
+}

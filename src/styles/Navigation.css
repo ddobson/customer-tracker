@@ -1,5 +1,5 @@
 a {
-  color: #000;
+  color: #333;
   font-weight: bold;
   text-decoration: none;
 }
@@ -22,5 +22,6 @@ a {
 }
 
 .nav-btn:hover {
-  box-shadow: 1px 1px 3px 0px rgba(85,85,85,1);
+  color: #333;
+  background-color: #EBEBEB;
 }

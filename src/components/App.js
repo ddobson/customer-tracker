@@ -50,7 +50,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="App">
           <h1 className="center-text">Customer Tracker</h1>
-          <div className="row main">
+          <div className="row top-xs main">
             <Navigation />
             <Route exact path="/" render={ () => <CustomerTable customers={ this.state.customers }/> } />
             <Route exact path="/new" component={ NewCustomer } />

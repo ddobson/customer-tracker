@@ -1,21 +1,31 @@
-table {
-  border-collapse: separate;
-  border: 1px solid #000;
-  border-radius: 6px;
+.list-wrap {
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
-  width: 95%
 }
 
-td, th {
-  border-left: solid black 1px;
-  border-top: solid black 1px;
-  text-align: center;
+.list-header {
+  background-color: #03A9F4;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #FFF;
 }
 
-th {
-  border-top: none;
+.list-header h2 {
+  margin: 5px 0 0;
+  padding: 5px;
 }
 
-td:first-child, th:first-child {
-  border-left: none;
+.list-wrap .list-item {
+  border: 1px solid #CCC;
+  border-top: 0;
+}
+
+.list-wrap .list-item:hover {
+  cursor: pointer;
+}
+
+.list-item:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }

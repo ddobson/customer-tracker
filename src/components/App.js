@@ -17,11 +17,13 @@ class App extends React.Component {
 
     this.state = {
       customers: [],
+      currentCustomer: {},
       isLoading: true,
       hasErrored: false
     };
 
     this.fetchCustomers = this.fetchCustomers.bind(this);
+    this.showCustomer = this.showCustomer.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
   }
 
@@ -34,6 +36,15 @@ class App extends React.Component {
       .then(response => response.json())
       .then((customers) => {
         this.setState({ customers, isLoading: false });
+      })
+      .catch(() => this.setState({ hasErrored: true }));
+  }
+
+  showCustomer(id) {
+    fetch(`${config[process.env.NODE_ENV]}/customers/${id}`)
+      .then(response => response.json())
+      .then((customer) => {
+        this.setState({ currentCustomer: customer });
       })
       .catch(() => this.setState({ hasErrored: true }));
   }
@@ -71,7 +82,7 @@ class App extends React.Component {
           <h1 className="center-text">Customer Tracker</h1>
           <div className="row top-xs main">
             <Navigation />
-            <Route exact path="/" render={ () => <CustomerTable customers={ this.state.customers }/> } />
+            <Route exact path="/" render={ () => <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/> } />
             <Route exact path="/new" render={ () => <NewCustomer createCustomer={ this.createCustomer }/> } />
           </div>
         </div>

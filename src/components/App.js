@@ -19,18 +19,25 @@ class App extends React.Component {
     this.state = {
       customers: [],
       currentCustomer: {},
+      editingCustomer: false,
       isLoading: true,
       hasErrored: false
     };
 
+    this.setEditStatus = this.setEditStatus.bind(this);
     this.fetchCustomers = this.fetchCustomers.bind(this);
     this.showCustomer = this.showCustomer.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
+    this.updateCustomer = this.updateCustomer.bind(this);
     this.destroyCustomer = this.destroyCustomer.bind(this);
   }
 
   componentDidMount() {
     this.fetchCustomers();
+  }
+
+  setEditStatus(bool) {
+    this.setState({ editingCustomer: bool });
   }
 
   fetchCustomers() {
@@ -44,7 +51,7 @@ class App extends React.Component {
 
   showCustomer(id) {
     const customers = this.state.customers;
-    const result = customers.filter((customer) => customer.id === id)[0];
+    const result = customers.find((customer) => customer.id === id);
 
     this.setState({ currentCustomer: result });
   }
@@ -67,6 +74,28 @@ class App extends React.Component {
       .catch(() => this.setState({ hasErrored: true }));
   }
 
+  updateCustomer(data) {
+    fetch(`${config[process.env.NODE_ENV]}/customers/${data.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then((customer) => {
+        const customers = this.state.customers.slice();
+        for (let i = 0; i < customers.length; i++) {
+          if (customers[i].id === data.id) {
+            customers[i] = customer;
+          }
+        }
+
+        this.setState({ customers, currentCustomer: customer, editingCustomer: false });
+      })
+      .catch(() => this.setState({ hasErrored: true }));
+  }
+
   destroyCustomer(id) {
     fetch(`${config[process.env.NODE_ENV]}/customers/${id}`, {
       method: 'DELETE',
@@ -86,7 +115,13 @@ class App extends React.Component {
         <div className="box">
           <div className="row">
             <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/>
-            <CustomerDetail currentCustomer={ this.state.currentCustomer } destroyCustomer={ this.destroyCustomer }/>
+            <CustomerDetail
+              setEditStatus={ this.setEditStatus }
+              currentCustomer={ this.state.currentCustomer } 
+              destroyCustomer={ this.destroyCustomer }
+              editingCustomer={ this.state.editingCustomer }
+              updateCustomer={ this.updateCustomer }
+            />
           </div>
         </div>
       </div>

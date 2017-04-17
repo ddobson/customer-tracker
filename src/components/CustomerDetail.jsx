@@ -1,11 +1,20 @@
 import React from 'react';
 
+import EditCustomer from './EditCustomer';
+
 const CustomerDetail = (props) => {
   let Content = (
     <p className="center-text">Select a customer to view their details.</p>
   );
 
-  if(Object.keys(props.currentCustomer).length !== 0) {
+  if (props.editingCustomer) {
+    Content = (
+      <EditCustomer 
+        customer={ props.currentCustomer } 
+        setEditStatus={ props.setEditStatus } 
+        updateCustomer={ props.updateCustomer }
+      />);
+  } else if (Object.keys(props.currentCustomer).length !== 0) {
     Content = (
       <div className="details-wrap">
         <p><span>Email: </span>{ props.currentCustomer.email }</p>
@@ -16,7 +25,7 @@ const CustomerDetail = (props) => {
         <p><span>Zip: </span>{ props.currentCustomer.address.zip }</p>
         <div className="btn-wrap">
           <button className="details-btn delete" onClick={ () => props.destroyCustomer(props.currentCustomer.id) }>Delete</button>
-          <button className="details-btn edit">Edit</button>
+          <button className="details-btn edit" onClick={ () => props.setEditStatus(true) }>Edit</button>
         </div>
       </div>
     );

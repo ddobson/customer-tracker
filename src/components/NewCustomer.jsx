@@ -3,8 +3,16 @@ import React from 'react';
 class NewCustomter extends React.Component {
   constructor(props) {
     super(props);
+    
+    this.handleCancel = this.handleCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buildFormData = this.buildFormData.bind(this);
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+
+    this.props.setNewStatus(false);
   }
 
   handleSubmit(event) {
@@ -63,7 +71,8 @@ class NewCustomter extends React.Component {
         </label>
         <label>
           <div className="btn-wrap">
-            <button className="button" type="submit">Submit</button>
+            <button className="details-btn" type="submit">Submit</button>
+            <button className="details-btn danger" onClick={ this.handleCancel }>Cancel</button>
           </div>
         </label>
       </form>

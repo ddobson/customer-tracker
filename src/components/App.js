@@ -131,6 +131,7 @@ class App extends React.Component {
               setNewStatus={ this.setNewStatus }  
             />
             <CustomerDetail
+              setNewStatus={ this.setNewStatus }
               setEditStatus={ this.setEditStatus }
               currentCustomer={ this.state.currentCustomer }
               createCustomer={ this.createCustomer }

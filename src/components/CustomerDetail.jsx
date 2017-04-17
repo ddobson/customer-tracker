@@ -12,7 +12,7 @@ const CustomerDetail = (props) => {
 
   if (props.showNewCustomer) {
     Content = (
-      <NewCustomer createCustomer={ props.createCustomer }/>
+      <NewCustomer setNewStatus={ props.setNewStatus } createCustomer={ props.createCustomer }/>
     );
   } else if (props.showEditCustomer) {
     Content = (
@@ -31,8 +31,8 @@ const CustomerDetail = (props) => {
         <p><span>State: </span>{ props.currentCustomer.address.state }</p>
         <p><span>Zip: </span>{ props.currentCustomer.address.zip }</p>
         <div className="btn-wrap">
-          <button className="details-btn delete" onClick={ () => props.destroyCustomer(props.currentCustomer.id) }>Delete</button>
-          <button className="details-btn edit" onClick={ () => props.setEditStatus(true) }>Edit</button>
+          <button className="details-btn danger" onClick={ () => props.destroyCustomer(props.currentCustomer.id) }>Delete</button>
+          <button className="details-btn" onClick={ () => props.setEditStatus(true) }>Edit</button>
         </div>
       </div>
     );

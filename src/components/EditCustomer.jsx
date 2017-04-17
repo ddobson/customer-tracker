@@ -71,7 +71,7 @@ class EditCustomer extends React.Component {
           <label>
             <div className="btn-wrap">
               <button className="details-btn" type="submit" onClick={ this.handleSubmit }>Submit</button>
-              <button className="details-btn" onClick={ this.handleCancel }>Cancel</button>
+              <button className="details-btn danger" onClick={ this.handleCancel }>Cancel</button>
             </div>
           </label>
         </form>

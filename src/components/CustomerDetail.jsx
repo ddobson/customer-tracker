@@ -1,14 +1,20 @@
 import React from 'react';
 
+import NewCustomer from './NewCustomer';
 import EditCustomer from './EditCustomer';
 
 import '../styles/forms.css';
+
 const CustomerDetail = (props) => {
   let Content = (
     <p className="center-text">Select a customer to view their details.</p>
   );
 
-  if (props.editingCustomer) {
+  if (props.showNewCustomer) {
+    Content = (
+      <NewCustomer createCustomer={ props.createCustomer }/>
+    );
+  } else if (props.showEditCustomer) {
     Content = (
       <EditCustomer 
         customer={ props.currentCustomer } 

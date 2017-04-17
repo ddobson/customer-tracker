@@ -34,6 +34,10 @@
   border-bottom-right-radius: 3px;
 }
 
+.new-customer-cta {
+  color: #03A9F4;
+}
+
 .details-wrap {
   padding: 0 10px;
 }

@@ -9,6 +9,9 @@ const CustomerTable = (props) => {
         <div className="content-header">
           <h2>Customers</h2>
         </div>
+          <div className="content-item">
+            <p className="new-customer-cta" onClick={ () => props.setNewStatus(true) }>New Customer</p>
+          </div>
           { props.customers.map((customer, i) => <CustomerRow key={`customer-${i}`} customer={customer} showCustomer={ props.showCustomer }/>) }
       </div>
     </div>

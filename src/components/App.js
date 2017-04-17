@@ -17,10 +17,12 @@ class App extends React.Component {
       customers: [],
       currentCustomer: {},
       showEditCustomer: false,
+      showNewCustomer: false,
       isLoading: true,
       hasErrored: false
     };
 
+    this.setNewStatus = this.setNewStatus.bind(this);
     this.setEditStatus = this.setEditStatus.bind(this);
     this.fetchCustomers = this.fetchCustomers.bind(this);
     this.showCustomer = this.showCustomer.bind(this);
@@ -31,6 +33,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchCustomers();
+  }
+
+  setNewStatus(bool) {
+    this.setState({ showNewCustomer: bool, showEditCustomer: false });
   }
 
   setEditStatus(bool) {
@@ -53,6 +59,7 @@ class App extends React.Component {
     this.setState({ 
       currentCustomer: result, 
       showEditCustomer: false,
+      showNewCustomer: false
     });
   }
 
@@ -68,7 +75,11 @@ class App extends React.Component {
       .then((customer) => {
         const customers = this.state.customers.slice();
         customers.push(customer);
-        this.setState({ customers });
+        this.setState({
+          customers,
+          currentCustomer: customer,
+          showNewCustomer: false
+        });
       })
       .then(() => form.reset())
       .catch(() => this.setState({ hasErrored: true }));
@@ -91,7 +102,6 @@ class App extends React.Component {
           }
         }
 
-        this.setState({ customers, currentCustomer: customer, editingCustomer: false });
         this.setState({ customers, currentCustomer: customer, showEditCustomer: false });
       })
       .catch(() => this.setState({ hasErrored: true }));
@@ -111,17 +121,22 @@ class App extends React.Component {
   }
 
   render() {
-    let Content = () => (
-      <div className="col-xs-12 col-md-9">
+    let Content = (
+      <div className="col-xs-12 col-sm-10">
         <div className="box">
-          <div className="row">
-            <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/>
+          <div className="row start-xs">
+            <CustomerTable 
+              customers={ this.state.customers }
+              showCustomer={ this.showCustomer }
+              setNewStatus={ this.setNewStatus }  
+            />
             <CustomerDetail
               setEditStatus={ this.setEditStatus }
-              currentCustomer={ this.state.currentCustomer } 
+              currentCustomer={ this.state.currentCustomer }
+              createCustomer={ this.createCustomer }
               destroyCustomer={ this.destroyCustomer }
-              editingCustomer={ this.state.editingCustomer }
               showEditCustomer={ this.state.showEditCustomer }
+              showNewCustomer={ this.state.showNewCustomer }
               updateCustomer={ this.updateCustomer }
             />
           </div>

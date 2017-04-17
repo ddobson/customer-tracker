@@ -41,3 +41,28 @@
 .details-wrap span {
   font-weight: bold;
 }
+
+.btn-wrap {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.details-btn {
+  background-color: #FFF;
+  border: 3px solid #03A9F4;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0 5px 10px 0;
+  padding: 10px;
+}
+
+.delete {
+  border: 3px solid #F44336;
+}
+
+.details-btn:hover {
+  background-color: #EBEBEB;
+  color: #333;
+  cursor: pointer;
+}

@@ -6,6 +6,7 @@ import config from '../config';
 // Components
 import Navigation from './Navigation';
 import CustomerTable from './CustomerTable';
+import CustomerDetail from './CustomerDetail';
 import NewCustomer from './NewCustomer';
 
 // Styles
@@ -66,12 +67,23 @@ class App extends React.Component {
   }
 
   render() {
+    let Content = () => (
+      <div className="col-xs-12 col-md-9">
+        <div className="box">
+          <div className="row">
+            <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/>
+            <CustomerDetail currentCustomer={ this.state.currentCustomer }/>
+          </div>
+        </div>
+      </div>
+    );
+
     if (this.state.hasErrored) {
-      return <p className="center-text">Sorry, an error has occured.</p>;
+      Content = () => <p className="center-text">Sorry, an error has occured.</p>;
     }
 
     if (this.state.isLoading) {
-      return <p className="center-text">Loading...</p>;
+      Content = () => <p className="center-text">Loading...</p>;
     }
 
     return (
@@ -80,7 +92,7 @@ class App extends React.Component {
           <h1 className="center-text">Customer Tracker</h1>
           <div className="row top-xs main">
             <Navigation />
-            <Route exact path="/" render={ () => <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/> } />
+            <Route exact path="/" component={ Content }/>
             <Route exact path="/new" render={ () => <NewCustomer createCustomer={ this.createCustomer }/> } />
           </div>
         </div>

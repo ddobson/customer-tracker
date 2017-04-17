@@ -25,7 +25,7 @@
   border-top: 0;
 }
 
-.content-wrap .content-item:hover {
+.content-wrap .customer-row:hover {
   cursor: pointer;
 }
 
@@ -36,6 +36,7 @@
 
 .new-customer-cta {
   color: #03A9F4;
+  font-weight: bold;
 }
 
 .details-wrap {

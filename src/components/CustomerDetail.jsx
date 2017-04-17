@@ -2,6 +2,7 @@ import React from 'react';
 
 import EditCustomer from './EditCustomer';
 
+import '../styles/forms.css';
 const CustomerDetail = (props) => {
   let Content = (
     <p className="center-text">Select a customer to view their details.</p>

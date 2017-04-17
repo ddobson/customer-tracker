@@ -41,12 +41,10 @@ class App extends React.Component {
   }
 
   showCustomer(id) {
-    fetch(`${config[process.env.NODE_ENV]}/customers/${id}`)
-      .then(response => response.json())
-      .then((customer) => {
-        this.setState({ currentCustomer: customer });
-      })
-      .catch(() => this.setState({ hasErrored: true }));
+    const customers = this.state.customers;
+    const result = customers.filter((customer) => customer.id === id)[0];
+
+    this.setState({ currentCustomer: result });
   }
 
   createCustomer(data, form) {

@@ -15,7 +15,7 @@ const CustomerDetail = (props) => {
         <p><span>State: </span>{ props.currentCustomer.address.state }</p>
         <p><span>Zip: </span>{ props.currentCustomer.address.zip }</p>
         <div className="btn-wrap">
-          <button className="details-btn delete">Delete</button>
+          <button className="details-btn delete" onClick={ () => props.destroyCustomer(props.currentCustomer.id) }>Delete</button>
           <button className="details-btn edit">Edit</button>
         </div>
       </div>

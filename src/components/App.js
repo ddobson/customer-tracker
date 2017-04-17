@@ -26,6 +26,7 @@ class App extends React.Component {
     this.fetchCustomers = this.fetchCustomers.bind(this);
     this.showCustomer = this.showCustomer.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
+    this.destroyCustomer = this.destroyCustomer.bind(this);
   }
 
   componentDidMount() {
@@ -66,13 +67,26 @@ class App extends React.Component {
       .catch(() => this.setState({ hasErrored: true }));
   }
 
+  destroyCustomer(id) {
+    fetch(`${config[process.env.NODE_ENV]}/customers/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        const customers = this.state.customers
+          .slice()
+          .filter((customer) => customer.id !== id);
+        this.setState({ customers, currentCustomer: {} });
+      })
+      .catch(() => this.setState({ hasErrored: true }));
+  }
+
   render() {
     let Content = () => (
       <div className="col-xs-12 col-md-9">
         <div className="box">
           <div className="row">
             <CustomerTable customers={ this.state.customers } showCustomer={ this.showCustomer }/>
-            <CustomerDetail currentCustomer={ this.state.currentCustomer }/>
+            <CustomerDetail currentCustomer={ this.state.currentCustomer } destroyCustomer={ this.destroyCustomer }/>
           </div>
         </div>
       </div>

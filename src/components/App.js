@@ -1,13 +1,10 @@
 // Dependancies
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
 import config from '../config';
 
 // Components
-import Navigation from './Navigation';
 import CustomerTable from './CustomerTable';
 import CustomerDetail from './CustomerDetail';
-import NewCustomer from './NewCustomer';
 
 // Styles
 import '../styles/App.css';
@@ -128,24 +125,20 @@ class App extends React.Component {
     );
 
     if (this.state.hasErrored) {
-      Content = () => <p className="center-text">Sorry, an error has occured.</p>;
+      Content = <p className="center-text">Sorry, an error has occured.</p>;
     }
 
     if (this.state.isLoading) {
-      Content = () => <p className="center-text">Loading...</p>;
+      Content = <p className="center-text">Loading...</p>;
     }
 
     return (
-      <BrowserRouter>
-        <div className="App">
-          <h1 className="center-text">Customer Tracker</h1>
-          <div className="row top-xs main">
-            <Navigation />
-            <Route exact path="/" component={ Content }/>
-            <Route exact path="/new" render={ () => <NewCustomer createCustomer={ this.createCustomer }/> } />
-          </div>
+      <div className="App">
+        <h1 className="center-text">Customer Tracker</h1>
+        <div className="row center-xs main">
+          { Content }
         </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }

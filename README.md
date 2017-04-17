@@ -17,3 +17,13 @@ Open the project directory in two tabs. Run the first command in the first tab a
 npm run json-api // start & watch json-server on port 4200
 npm run start // start the application
 ```
+
+#### Next Steps
+
+Here's a list of features I might add if I continued working on the App
+
+- A form validation service
+- Extract API calls into a sperate file
+- Add search functionality to filter customer list
+- Add images to customers
+- More robust error handling

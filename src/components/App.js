@@ -16,7 +16,7 @@ class App extends React.Component {
     this.state = {
       customers: [],
       currentCustomer: {},
-      editingCustomer: false,
+      showEditCustomer: false,
       isLoading: true,
       hasErrored: false
     };
@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   setEditStatus(bool) {
-    this.setState({ editingCustomer: bool });
+    this.setState({ showEditCustomer: bool, showNewCustomer: false });
   }
 
   fetchCustomers() {
@@ -50,7 +50,10 @@ class App extends React.Component {
     const customers = this.state.customers;
     const result = customers.find((customer) => customer.id === id);
 
-    this.setState({ currentCustomer: result });
+    this.setState({ 
+      currentCustomer: result, 
+      showEditCustomer: false,
+    });
   }
 
   createCustomer(data, form) {
@@ -89,6 +92,7 @@ class App extends React.Component {
         }
 
         this.setState({ customers, currentCustomer: customer, editingCustomer: false });
+        this.setState({ customers, currentCustomer: customer, showEditCustomer: false });
       })
       .catch(() => this.setState({ hasErrored: true }));
   }
@@ -117,6 +121,7 @@ class App extends React.Component {
               currentCustomer={ this.state.currentCustomer } 
               destroyCustomer={ this.destroyCustomer }
               editingCustomer={ this.state.editingCustomer }
+              showEditCustomer={ this.state.showEditCustomer }
               updateCustomer={ this.updateCustomer }
             />
           </div>
